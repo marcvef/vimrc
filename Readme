@@ -1,21 +1,4 @@
 # Installation
-
-1. git submodule init
-2. git submodule update
-3. run install.sh to move .byobu/, .vim/, and .vimrc to ~
-4. (optional) run install_tmux_conf.sh to copy and backup .tmux.conf to ~
-5. vim +PluginInstall +qall
-
-# Adding proper TrueColor support 
-
-Use a terminal with TrueColor support
-
-## .bashrc
-alias byobu="env TERM=xterm-256color byobu"
-
-TERM="screen-256color"
-export TERM
-
-## .tmux.conf in .byobu/
-set -g terminal-overrides ",xterm-256color:Tc"
-set -g default-terminal "screen-256color"
+1. git clone --recurse-submodules https://github.com/marcvef/vimrc.git
+2. run install.sh to move .byobu/ and .vimrc to ~
+3. vim +PlugInstall
