@@ -2,20 +2,36 @@
 set nocompatible
 filetype off
 
+
+" vim plug
+call plug#begin()
+
+Plug 'morhetz/gruvbox'
+Plug 'preservim/nerdtree'
+Plug 'bling/vim-airline'
+Plug 'scrooloose/nerdcommenter'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+"Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
+
+" init plugin system
+call plug#end()
+
 " set runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-" let Vundle manage Vundle, required
-Plugin 'gmarik/vundle'
-
-"scripts on GitHub repos
-Plugin 'scrooloose/nerdtree'
-Plugin 'bling/vim-airline'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'tyrannicaltoucan/vim-quantum'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'morhetz/gruvbox'
+"set rtp+=~/.vim/bundle/vundle/
+"call vundle#rc()
+"
+"" let Vundle manage Vundle, required
+"Plugin 'gmarik/vundle'
+"
+""scripts on GitHub repos
+"Plugin 'scrooloose/nerdtree'
+"Plugin 'bling/vim-airline'
+"Plugin 'scrooloose/nerdcommenter'
+"Plugin 'tyrannicaltoucan/vim-quantum'
+"Plugin 'easymotion/vim-easymotion'
+"Plugin 'morhetz/gruvbox'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -38,7 +54,7 @@ let g:mapleader = ","
 nmap <leader>w :w!<cr>
 " fast quit
 nmap <leader>q :q!<cr>
-" " fast save/quit
+" fast save/quit
 nmap <leader>s :wq<cr>
 
 " :W sudo saves the file 
@@ -104,7 +120,7 @@ map <F5> :w<CR>:!make && ./run<CR>
 " Enable syntax highlighting
 syntax enable
 set background=dark
-set termguicolors
+"set termguicolors
 if &term =~# '^screen'
         let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
         let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
@@ -134,7 +150,7 @@ set ffs=unix,dos,mac
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use spaces instead of tabs
-"set expandtab
+set expandtab
 
 " Be smart when using tabs ;)
 set smarttab
@@ -149,7 +165,8 @@ set tw=500
 
 "set ai "Auto indent
 set si "Smart indent
-set wrap "Wrap lines
+"set wrap "Wrap lines
+set nowrap
 
 
 """"""""""""""""""""""""""""""
@@ -207,3 +224,36 @@ function! HasPaste()
     en
     return ''
 endfunction
+
+""""""""""""""""""""""""""""""
+" => Nerd commenter
+""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""
+" => coc
+""""""""""""""""""""""""""""""
+nmap <leader>gd <Plug>(coc-definition)
+nmap <leader>gr <Plug>(coc-references)
+nnoremap <silent> <leader>ag :Ag <C-R><C-W><CR>
+"map <Leader>ag :call fzf#vim#ag(expand('<cword>'))<kEnter>
+
+""""""""""""""""""""""""""""""
+" => fzf
+""""""""""""""""""""""""""""""
+" Customize fzf colors to match your color scheme
+" - fzf#wrap translates this to a set of `--color` options
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
